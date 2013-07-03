@@ -1,0 +1,10 @@
+@import "../foundation/scss/normalize.scss";
+@import "../foundation/scss/foundation.scss";
+
+/* class which is removed by angular when the data is loaded */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  visibility: hidden;
+}
+
+
+
