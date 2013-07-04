@@ -22,9 +22,18 @@
     <script src="/assets/javascripts/respond.js"></script>
     <![endif]-->
 
+    @* -- reverse routing for js -- *@
+    <script type="text/javascript" src="@routes.JavascriptRoutes.jsRoutes"></script>
+
     <script src="/assets/javascripts/angular.min.js" type="text/javascript"></script>
     <script src="/assets/javascripts/angular-resource.min.js" type="text/javascript"></script>
+
+    @* -- Angular app js -- *@
     <script src="@routes.Assets.at("scripts/app/app.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("scripts/app/user/userService.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("scripts/app/user/controllers/userTable.js")" type="text/javascript"></script>
+
+    @* -- foundation js -- *@
     <script src="@routes.Assets.at("foundation/js/foundation/foundation.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("foundation/js/foundation/foundation.alerts.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("foundation/js/foundation/foundation.clearing.js")" type="text/javascript"></script>

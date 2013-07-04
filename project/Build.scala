@@ -1,7 +1,6 @@
 import net.litola.SassPlugin
 import sbt._
 import Keys._
-import play.Project._
 
 object ApplicationBuild extends Build {
 
@@ -10,12 +9,9 @@ object ApplicationBuild extends Build {
 
   val appDependencies = Seq(
     "org.reactivemongo" %% "play2-reactivemongo" % "0.9"
-    //, "play-json-zipper"  %% "play-json-zipper"    % "0.1-SNAPSHOT"
   )
 
-  libraryDependencies ++= Seq(
-    "joda-time" % "joda-time" % "2.2"
-  )
+  libraryDependencies ++= Seq()
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
     scalacOptions += "-feature",

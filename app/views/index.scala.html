@@ -2,8 +2,26 @@
 @main("a title") {
 
 <div class="row">
-    <div class="large-12 columns">
-        <h1>Hi! <i class="icon-smile"></i></h1>
+    <div class="large-12 columns" ng-controller="userTable">
+        <h2>Hi! <i class="icon-smile"></i></h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>User name</th>
+                    <th>Email</th>
+                    <th>Last update&nbsp;<i class="icon-refresh right" ng-class="{'icon-spin': isLoading}" ng-click="refreshUserTable()"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.updatedOn}}</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </div>
 
