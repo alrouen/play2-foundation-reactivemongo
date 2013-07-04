@@ -8,6 +8,7 @@
         <table>
             <thead>
                 <tr>
+                    <th><i class="icon-wrench icon-large"></i></th>
                     <th>User name</th>
                     <th>Email</th>
                     <th>Last update&nbsp;<i class="icon-refresh right" ng-class="{'icon-spin': isLoading}" ng-click="refreshUserTable()"></i></th>
@@ -15,6 +16,10 @@
             </thead>
             <tbody>
                 <tr ng-repeat="user in users">
+                    <td>
+                        <i class="icon-remove-sign icon-large" ng-click="deleteUser(user.id)" style="color:red;"></i>
+                        <i class="icon-edit icon-large" ng-click="updateUser(user)" style="color:brown;"></i>
+                    </td>
                     <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.updatedOn}}</td>
