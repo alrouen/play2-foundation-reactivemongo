@@ -6,11 +6,19 @@
   visibility: hidden;
 }
 
-.deleteUser {
-    font-size:0.8em;
+.hoverIcon {
 }
 
-.deleteUser:hover {
-    font-size:1.0em;
+.hoverIcon:hover {
+}
+
+form {
+    input.ng-invalid.ng-dirty, select.ng-invalid.ng-dirty {
+        background-color: #FFFFC5;
+        color:#F30;
+    }
+
+    input.ng-valid.ng-dirty, select.ng-valid.ng-dirty {
+    }
 }
 

@@ -17,7 +17,6 @@ object UserApi extends Controller with ApiFormat {
         Ok(Json.toJson(users)(Writes.seq(userApiWrites)))
       }
     }
-
   }
 
   def createUser = Action(parse.json) { request =>
@@ -44,6 +43,12 @@ object UserApi extends Controller with ApiFormat {
 
     }.recoverTotal( e => BadRequest(Json.obj("error" -> JsError.toFlatJson(e))) )
 
+  }
+
+  def checkEmail(email: String) = Action {
+    Async {
+      Users.findByEmail(email).map { mayBeUser => Ok(Json.obj("email" -> email, "alreadyExist" -> mayBeUser.isDefined)) }
+    }
   }
 
   def updateUser(id: String) = Action(parse.json) { request =>
@@ -76,7 +81,6 @@ object UserApi extends Controller with ApiFormat {
 
   private def checkId(id: String)(f: BSONObjectID => Result) = {
     BSONObjectID.parse(id).map(f) getOrElse(BadRequest(Json.obj("error" -> "invalidId")))
-
   }
 
 }

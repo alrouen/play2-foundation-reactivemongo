@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index
 
 ## User API
 GET     /api/users                  controllers.UserApi.getAllUsers
+GET     /api/users/email/:email     controllers.UserApi.checkEmail(email: String)
 POST    /api/users                  controllers.UserApi.createUser
 PUT     /api/users/:id              controllers.UserApi.updateUser(id: String)
 DELETE  /api/users/:id              controllers.UserApi.deleteUser(id: String)

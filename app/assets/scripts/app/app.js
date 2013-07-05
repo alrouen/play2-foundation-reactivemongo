@@ -22,3 +22,29 @@ myapp.directive('contenteditable', function() {
     }
   };
 });
+
+myapp.directive('mustMatch', function(){
+  return {
+      require: 'ngModel',
+      restrict: 'A',
+      link: function(scope, elm, attrs, ctrl) {
+
+          ctrl.$parsers.unshift(function(viewValue) {
+
+              var newPassword = scope.$eval(attrs.mustMatch)
+
+              if(newPassword && newPassword == viewValue) {
+                  ctrl.$setValidity('mustMatch', true);
+              } else {
+                  ctrl.$setValidity('mustMatch', false);
+              }
+
+              return viewValue;
+          });
+
+          scope.$watch(attrs.mustMatch, function() {
+              ctrl.$setViewValue(ctrl.$viewValue);
+          });
+      }
+  }
+});
