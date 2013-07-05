@@ -5,27 +5,28 @@
     <div class="large-12 columns" ng-controller="userTable">
         <h2>Hi! <i class="icon-smile"></i></h2>
 
-        <table>
-            <thead>
+        <div class="row">
+            <table class="large-12 column">
+                <thead>
                 <tr>
                     <th><i class="icon-wrench icon-large"></i></th>
                     <th>User name</th>
                     <th>Email</th>
                     <th>Last update&nbsp;<i class="icon-refresh right" ng-class="{'icon-spin': isLoading}" ng-click="refreshUserTable()"></i></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr ng-repeat="user in users">
                     <td>
-                        <i class="icon-remove-sign icon-large" ng-click="deleteUser(user.id)" style="color:red;"></i>
-                        <i class="icon-edit icon-large" ng-click="updateUser(user)" style="color:brown;"></i>
+                        <i class="icon-remove-sign icon-large deleteUser" ng-click="deleteUser(user)" style="color:#a88a8a;"></i>
                     </td>
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
+                    <td contenteditable="true" ng-change="updateUser(user)" ng-model="user.name">{{user.name}}</td>
+                    <td contenteditable="true" ng-change="updateUser(user)" ng-model="user.email">{{user.email}}</td>
                     <td>{{user.updatedOn}}</td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 </div>

@@ -13,10 +13,12 @@ angular.module('user').controller('userTable', function($scope, userService) {
 
     $scope.refreshUserTable = function(){refresh()}
 
-    $scope.deleteUser = function(id) {
-        /*
-        userService.remove(id,refreshUserTable())
-        */
+    $scope.deleteUser = function(user) {
+        userService.remove({id: user.id},refresh)
+    }
+
+    $scope.createUser = function(user) {
+        userService.save(user,refresh)
     }
 
     $scope.updateUser = function(user) {
