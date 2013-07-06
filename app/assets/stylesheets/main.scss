@@ -20,11 +20,12 @@
 
 table {
     .rowForInput {
-        border-top:1px grey dashed;
+        border-top:1px lightgrey solid;
         background-color:whitesmoke !important;
     }
 
     .rowForMessage {
+        border-bottom:1px lightgrey solid;
         background-color:whitesmoke !important;
     }
 }
