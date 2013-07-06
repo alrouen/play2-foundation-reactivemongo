@@ -51,18 +51,20 @@
                     <tbody>
                         <tr ng-repeat="user in users">
                             <td>
-                                <i class="icon-remove-sign icon-large deleteIcon" ng-class="{'disabled' : userOnEdit == user}" ng-click="userOnEdit == user || deleteUser(user)"></i>
-                                <i class="icon-edit icon-large userEditIcon" ng-click="editUser(user)" ng-show="userOnEdit != user"></i>
-                                <span ng-show="userOnEdit == user">
-                                    <i class="icon-ok-sign icon-large commitEditIcon" ng-click="commitEdit()"></i>
+                                <i class="icon-remove-sign icon-large deleteIcon" ng-class="{'disabled' : userOnEdit.id == user.id}" ng-click="userOnEdit.id == user.id || deleteUser(user)"></i>
+                                <i class="icon-edit icon-large userEditIcon" ng-click="editUser(user)" ng-show="userOnEdit.id != user.id"></i>
+                                <span ng-show="userOnEdit.id == user.id">
+                                    <i class="icon-ok-sign icon-large commitEditIcon" ng-click="commitEdit(user)"></i>
                                     <i class="icon-undo icon-large cancelEditIcon" ng-click="rollbackEdit()"></i>
                                 </span>
                             </td>
                             <td>
-                                <span ng-model="user.name">{{user.name}}</span>
+                                <span ng-show="userOnEdit.id != user.id" >{{user.name}}</span>
+                                <input type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50" ng-show="userOnEdit.id == user.id" ng-model="userOnEdit.name">
                             </td>
                             <td>
-                                <span ng-model="user.email">{{user.email}}</span>
+                                <span ng-show="userOnEdit.id != user">{{user.email}}</span>
+                                <input type="email" required ng-change="" ng-show="userOnEdit.id == user" ng-model="userOnEdit.email">
                             </td>
                             <td>{{user.updatedOn}}</td>
                         </tr>

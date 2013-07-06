@@ -15,25 +15,25 @@ $okColor:#2ba6cb;
 }
 
 .deleteIcon, .cancelEditIcon {
-    color:rgba( $warningColor, .7 );
+    color:rgba($warningColor, .6);
     &:hover{
         color:$warningColor;
     }
 
     &:hover.disabled{
-        color:rgba( $warningColor, .7 );
+        color:rgba($warningColor, .6);
     }
 }
 
 .userEditIcon {
-    color:rgba( $editColor, .7 );
+    color:rgba($editColor, .6);
     &:hover {
         color:$editColor;
     }
 }
 
 .commitEditIcon {
-    color:rgba($okColor, .7);
+    color:rgba($okColor, .6);
     &:hover {
         color:$okColor;
     }

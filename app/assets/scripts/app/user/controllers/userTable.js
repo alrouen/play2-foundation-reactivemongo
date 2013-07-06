@@ -49,19 +49,18 @@ angular.module('user').controller('userTable', function($scope, userService) {
     }
 
     $scope.editUser = function(user) {
-        $scope.userOnEdit = user;
+        $scope.userOnEdit = angular.copy(user);
     }
 
-    $scope.commitEdit = function() {
-        $scope.userOnEdit = undefined;
+    $scope.commitEdit = function(user) {
+        userService.update({id: user.id}, {name: $scope.userOnEdit.name, email: $scope.userOnEdit.email}, function(){
+            user = angular.copy($scope.userOnEdit);
+            $scope.userOnEdit = undefined;
+        })
     }
 
     $scope.rollbackEdit = function() {
         $scope.userOnEdit = undefined;
-    }
-
-    $scope.update = function(user) {
-        userService.update({id: user.id}, {name: user.name, email: user.email}, refresh)
     }
 
     refresh();

@@ -31,7 +31,7 @@ object UserApi extends Controller with ApiFormat {
             creation <- {
               maybeUser match {
                 case Some(user) => {
-                  Future(BadRequest(Json.obj("error" -> "alreadyExisting")))
+                  Future(BadRequest(Json.obj("error" -> "emailAlreadyExisting")))
                 }
                 case None => {
                   val u = new User(name = name, email = email, password = password).cryptPassword
@@ -64,7 +64,17 @@ object UserApi extends Controller with ApiFormat {
               maybeUser <- Users.findById(bsonId)
               update <- {
                 maybeUser match {
-                  case Some(user) => Users.update(user.copy(name = name, email = email)).map { _ => Ok}
+                  case Some(user) =>
+                  {
+                    if(email != user.email) {
+                      Users.findByEmail(email).flatMap {
+                        case Some(userWithSameEmail) => Future(BadRequest(Json.obj("error" -> "emailAlreadyExisting")))
+                        case None => Users.update(user.copy(name = name, email = email)).map { _ => Ok}
+                      }
+                    } else {
+                      Users.update(user.copy(name = name, email = email)).map { _ => Ok}
+                    }
+                  }
                   case None => Future(NotFound)
                 }
               }
