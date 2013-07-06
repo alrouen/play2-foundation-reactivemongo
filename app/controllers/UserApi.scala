@@ -14,7 +14,7 @@ object UserApi extends Controller with ApiFormat {
 
   def getAllUsers = Action {
     Async {
-      Users.findAll.map { users =>
+      Users.findAll(Json.obj("updatedOn" -> -1)).map { users =>
         Ok(Json.toJson(users)(Writes.seq(userApiWrites)))
           .withHeaders(CACHE_CONTROL -> "no-cache, no-store", PRAGMA -> "no-cache") // Pragma & Cache-Control to avoid caching issue on Safari & IE
       }

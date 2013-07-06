@@ -6,64 +6,63 @@
         <h2>Hi! <i class="icon-smile"></i></h2>
 
         <div class="row">
-            <form name="newUserForm" ng-submit="newUserForm.$valid || createUser(newUser)">
-            <table class="large-12 column">
-                <thead>
-                    <tr>
-                        <th width="4%;"></th>
-                        <th width="31%;"></th>
-                        <th width="31%;"></th>
-                        <th width="32%;"><i class="icon-refresh right" ng-class="{'icon-spin': isLoading}" ng-click="refreshUserTable()"></i></th>
-                    </tr>
-                    <tr class="rowForInput">
-                        <th></th>
-                        <th>
-                            <label for="name">Name</label>
-                            <input id="name" type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50" ng-model="newUser.name">
-                            <label for="email">Email</label>
-                            <input id="email" name="email" type="email" required ng-change="checkEmail(newUser.email)" ng-model="newUser.email">
-                        </th>
-                        <th>
-                            <label for="password">Password (min 5 characters)</label>
-                            <input id="password" type="password" required ng-minlength="5" ng-maxlength="50" maxlength="50" ng-model="newUser.password">
-                            <label for="confirmPassword">Password confirmation</label>
-                            <input id="confirmPassword" type="password" required ng-minlength="5" ng-maxlength="50" maxlength="50" must-match="newUser.password" ng-model="newUser.confirmPassword">
-                        </th>
-                        <th style="vertical-align:bottom;">
-                            <button type="submit" class="saveButton round small" ng-class="{'disabled' : newUserForm.$invalid}" ng-click="newUserForm.$invalid || createUser(newUser)">
-                                <i class="icon-save icon-large"></i>
-                            </button>
-                        </th>
-                    </tr>
-                    <tr class="rowForMessage">
-                        <th></th>
-                        <th colspan="3">
-                            <span class="errorInfo" ng-show="newUserForm.email.$error.emailAvailable">Email already existing!</span>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th><i class="icon-wrench icon-large"></i></th>
-                        <th>User name</th>
-                        <th>Email</th>
-                        <th>Last update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="user in users">
-                    <td>
-                        <i class="icon-remove-sign icon-large deleteIcon" ng-click="deleteUser(user)"></i>
-                    </td>
-                    <td>
-                        <span ng-dblclick="edit(user)">{{user.name}}</span>
-                    </td>
-                    <td>
-                        <span ng-dblclick="edit(user)">{{user.email}}</span>
-                    </td>
-                    <td>{{user.updatedOn}}</td>
-                </tr>
-
-                </tbody>
-            </table>
+            <form name="newUserForm">
+                <table class="large-12 column">
+                    <thead>
+                        <tr height="32px;">
+                            <th width="4%;"></th>
+                            <th width="31%;"></th>
+                            <th width="31%;"></th>
+                            <th width="32%;">
+                                <div class="right">
+                                    <span class="left" style="font-weight:lighter;" ng-show="isLoading">loading...&nbsp;&nbsp;</span>
+                                    <span><i class="refreshIcon icon-refresh right" ng-class="{'icon-spin': isLoading}" ng-click="refreshUserTable()"></i></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="rowForInput">
+                            <th></th>
+                            <th>
+                                <label for="name">Name</label>
+                                <input id="name" type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50" ng-model="newUser.name">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="email" required ng-change="setEmailAvailability(newUser.email)" ng-model="newUser.email">
+                            </th>
+                            <th>
+                                <label for="password">Password (min 5 characters)</label>
+                                <input id="password" type="password" required ng-minlength="5" ng-maxlength="50" maxlength="50" ng-model="newUser.password">
+                                <label for="confirmPassword">Password confirmation</label>
+                                <input id="confirmPassword" type="password" required ng-minlength="5" ng-maxlength="50" maxlength="50" must-match="newUser.password" ng-model="newUser.confirmPassword">
+                            </th>
+                            <th style="vertical-align:bottom;">
+                                <button type="submit" class="saveButton radius small" ng-class="{'disabled' : newUserForm.$invalid}" ng-click="newUserForm.$invalid || createUser(newUser)">
+                                    <i class="icon-save icon-large"></i>
+                                </button>
+                                <span class="errorInfo" ng-show="newUserForm.email.$error.emailAvailable">&nbsp;Email already existing!</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th><i class="icon-wrench icon-large"></i></th>
+                            <th>User name</th>
+                            <th>Email</th>
+                            <th>Last update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users">
+                            <td>
+                                <i class="icon-remove-sign icon-large deleteIcon" ng-click="deleteUser(user)"></i>
+                            </td>
+                            <td>
+                                <span ng-dblclick="edit(user)">{{user.name}}</span>
+                            </td>
+                            <td>
+                                <span ng-dblclick="edit(user)">{{user.email}}</span>
+                            </td>
+                            <td>{{user.updatedOn}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </form>
         </div>
 

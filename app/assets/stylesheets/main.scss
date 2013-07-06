@@ -6,6 +6,10 @@
   visibility: hidden;
 }
 
+.refreshIcon {
+    cursor:pointer;
+}
+
 .deleteIcon {
     color:#a88a8a;
 }
@@ -16,6 +20,12 @@
 
 .saveButton {
     @include button;
+
+/*    background-color:blue;
+
+    &.disabled {
+        background-color:red;
+    } */
 }
 
 table {

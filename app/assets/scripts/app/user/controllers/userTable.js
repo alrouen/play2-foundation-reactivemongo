@@ -2,16 +2,12 @@ angular.module('user').controller('userTable', function($scope, userService) {
 
     $scope.newUser = { };
     $scope.isLoading = false;
-    //$scope.newUserForm.$setValidity("emailAlreadyExist", false);
 
     var refresh = function() {
         $scope.isLoading = true;
         userService.query(function(allUsers) {
             $scope.users = allUsers;
-            setTimeout(function(){
-                $scope.$apply(function(){$scope.isLoading = false;})
-            },1000);
-
+            $scope.isLoading = false;
         })
     }
 
@@ -23,7 +19,7 @@ angular.module('user').controller('userTable', function($scope, userService) {
         }
     }
 
-    $scope.checkEmail = function(email) {
+    $scope.setEmailAvailability = function(email) {
         userService.get({id: "checkEmail", email : email},
             function(response){
                 if(response.alreadyExist) {
@@ -37,7 +33,6 @@ angular.module('user').controller('userTable', function($scope, userService) {
                 console.log(error.data);
             }
         );
-        return true;
     }
 
     $scope.createUser = function(user) {

@@ -35,7 +35,7 @@ abstract class MongoModel[T: Format, ID: Format] {
 
   def findOne(query: JsObject, sort: JsObject = Json.obj()) = collection.find(query).sort(sort).one[T]
 
-  def findAll = find(Json.obj())
+  def findAll(sort: JsObject = Json.obj()) = find(query = Json.obj(), sort = sort)
 
   def findById(id: ID): Future[Option[T]] = findOne(Json.obj("_id" -> id))
 
