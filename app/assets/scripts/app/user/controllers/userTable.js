@@ -1,7 +1,8 @@
 angular.module('user').controller('userTable', function($scope, userService) {
 
-    $scope.newUser = {};
+    $scope.newUser = { };
     $scope.isLoading = false;
+    //$scope.newUserForm.$setValidity("emailAlreadyExist", false);
 
     var refresh = function() {
         $scope.isLoading = true;
@@ -17,13 +18,25 @@ angular.module('user').controller('userTable', function($scope, userService) {
     $scope.refreshUserTable = function(){refresh()}
 
     $scope.deleteUser = function(user) {
-        if(window.confirm("are you sure ?")) {
+        if(window.confirm("you're going to remove ["+user.name+"], are you sure ?")) {
             userService.remove({id: user.id},refresh)
         }
     }
 
     $scope.checkEmail = function(email) {
-        console.log(email)
+        userService.get({id: "checkEmail", email : email},
+            function(response){
+                if(response.alreadyExist) {
+                    $scope.newUserForm.email.$setValidity("emailAvailable", false);
+                } else {
+                    $scope.newUserForm.email.$setValidity("emailAvailable", true);
+                }
+
+            },
+            function(error){
+                console.log(error.data);
+            }
+        );
         return true;
     }
 
@@ -33,8 +46,8 @@ angular.module('user').controller('userTable', function($scope, userService) {
                 $scope.newUser = {};
                 refresh();
             },
-            function(response){
-                console.log(response.data)
+            function(error){
+                console.log(error.data)
             }
         )
     }

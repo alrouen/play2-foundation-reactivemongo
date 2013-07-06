@@ -6,6 +6,7 @@ import play.api.mvc._
 import play.api.libs.json.{JsError, Json, Writes}
 import models.{Users, User, ApiFormat}
 import reactivemongo.bson.BSONObjectID
+import play.Logger
 
 
 object UserApi extends Controller with ApiFormat {
@@ -15,6 +16,7 @@ object UserApi extends Controller with ApiFormat {
     Async {
       Users.findAll.map { users =>
         Ok(Json.toJson(users)(Writes.seq(userApiWrites)))
+          .withHeaders(CACHE_CONTROL -> "no-cache, no-store", PRAGMA -> "no-cache") // Pragma & Cache-Control to avoid caching issue on Safari & IE
       }
     }
   }
@@ -41,7 +43,9 @@ object UserApi extends Controller with ApiFormat {
         }
       }
 
-    }.recoverTotal( e => BadRequest(Json.obj("error" -> JsError.toFlatJson(e))) )
+    }.recoverTotal{ e =>
+      Logger.error("create user error: "+JsError.toFlatJson(e).toString())
+      BadRequest(Json.obj("error" -> JsError.toFlatJson(e))) }
 
   }
 

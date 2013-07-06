@@ -6,16 +6,38 @@
   visibility: hidden;
 }
 
-.hoverIcon {
+.deleteIcon {
+    color:#a88a8a;
 }
 
-.hoverIcon:hover {
+.deleteIcon:hover {
+    color:#e66a6a;
+}
+
+.saveButton {
+    @include button;
+}
+
+table {
+    .rowForInput {
+        border-top:1px grey dashed;
+        background-color:whitesmoke !important;
+    }
+
+    .rowForMessage {
+        background-color:whitesmoke !important;
+    }
 }
 
 form {
+    .errorInfo {
+        font-size:0.8em;
+        color:#f30;
+    }
+
     input.ng-invalid.ng-dirty, select.ng-invalid.ng-dirty {
-        background-color: #FFFFC5;
-        color:#F30;
+        background-color: #ffffc5;
+        color:#f30;
     }
 
     input.ng-valid.ng-dirty, select.ng-valid.ng-dirty {

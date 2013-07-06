@@ -13,13 +13,13 @@
                     <th width="4%;"><i class="icon-wrench icon-large"></i></th>
                     <th width="31%;">User name</th>
                     <th width="31%;">Email</th>
-                    <th width="32%;">Last update&nbsp;<i class="icon-refresh right hoverIcon" ng-class="{'icon-spin': isLoading}" ng-click="refreshUserTable()"></i></th>
+                    <th width="32%;">Last update&nbsp;<i class="icon-refresh right" ng-class="{'icon-spin': isLoading}" ng-click="refreshUserTable()"></i></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="user in users">
                     <td>
-                        <i class="icon-remove-sign icon-large hoverIcon" ng-click="deleteUser(user)" style="color:#a88a8a;"></i>
+                        <i class="icon-remove-sign icon-large deleteIcon" ng-click="deleteUser(user)"></i>
                     </td>
                     <td>
                         <span ng-dblclick="edit(user)">{{user.name}}</span>
@@ -29,27 +29,30 @@
                     </td>
                     <td>{{user.updatedOn}}</td>
                 </tr>
-                <tr style="border-top:1px grey dashed;">
-                    <td>
-                    </td>
+                <tr class="rowForInput">
+                    <td></td>
                     <td>
                         <label for="name">Name</label>
                         <input id="name" type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50" ng-model="newUser.name">
-                        <label for="password">Password (min 5 characters)</label>
-                        <input id="password" type="password" required ng-minlength="5" ng-maxlength="50" maxlength="50" ng-model="newUser.password">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" required ng-change="checkEmail(newUser.email)" ng-model="newUser.email">
                     </td>
                     <td>
-                        <label for="email">Email</label>
-                        <input id="email" type="email" required ng-change="checkEmail(newUser.email)" ng-model="newUser.email">
+                        <label for="password">Password (min 5 characters)</label>
+                        <input id="password" type="password" required ng-minlength="5" ng-maxlength="50" maxlength="50" ng-model="newUser.password">
                         <label for="confirmPassword">Password confirmation</label>
                         <input id="confirmPassword" type="password" required ng-minlength="5" ng-maxlength="50" maxlength="50" must-match="newUser.password" ng-model="newUser.confirmPassword">
                     </td>
-                    <td>
-                        <span class="icon-stack" ng-click="newUserForm.$invalid || createUser(newUser)">
-                            <i style="color:#a88a8a" class="icon-ban-circle icon-stack-base" ng-show="newUserForm.$invalid"></i>
-                            <i style="color:#e0e0e0" class="icon-sign-blank icon-stack-base" ng-show="newUserForm.$valid"></i>
-                            <i class="icon-save"></i>
-                        </span>
+                    <td style="vertical-align:bottom;">
+                        <button type="submit" class="saveButton round small" ng-class="{'disabled' : newUserForm.$invalid}" ng-click="newUserForm.$invalid || createUser(newUser)">
+                            <i class="icon-save icon-large"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="rowForMessage">
+                    <td></td>
+                    <td colspan="3">
+                        <span class="errorInfo" ng-show="newUserForm.email.$error.emailAvailable">Email already existing!</span>
                     </td>
                 </tr>
                 </tbody>
