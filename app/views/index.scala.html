@@ -10,10 +10,10 @@
                 <table class="large-12 column">
                     <thead>
                         <tr height="32px;">
-                            <th width="4%;"></th>
-                            <th width="31%;"></th>
-                            <th width="31%;"></th>
-                            <th width="32%;">
+                            <th width="8%;"></th>
+                            <th width="30%;"></th>
+                            <th width="30%;"></th>
+                            <th width="30%;">
                                 <div class="right">
                                     <span class="left" style="font-weight:lighter;" ng-show="isLoading">loading...&nbsp;&nbsp;</span>
                                     <span><i class="refreshIcon icon-refresh right" ng-class="{'icon-spin': isLoading}" ng-click="refreshUserTable()"></i></span>
@@ -51,13 +51,18 @@
                     <tbody>
                         <tr ng-repeat="user in users">
                             <td>
-                                <i class="icon-remove-sign icon-large deleteIcon" ng-click="deleteUser(user)"></i>
+                                <i class="icon-remove-sign icon-large deleteIcon" ng-class="{'disabled' : userOnEdit == user}" ng-click="userOnEdit == user || deleteUser(user)"></i>
+                                <i class="icon-edit icon-large userEditIcon" ng-click="editUser(user)" ng-show="userOnEdit != user"></i>
+                                <span ng-show="userOnEdit == user">
+                                    <i class="icon-ok-sign icon-large commitEditIcon" ng-click="commitEdit()"></i>
+                                    <i class="icon-undo icon-large cancelEditIcon" ng-click="rollbackEdit()"></i>
+                                </span>
                             </td>
                             <td>
-                                <span ng-dblclick="edit(user)">{{user.name}}</span>
+                                <span ng-model="user.name">{{user.name}}</span>
                             </td>
                             <td>
-                                <span ng-dblclick="edit(user)">{{user.email}}</span>
+                                <span ng-model="user.email">{{user.email}}</span>
                             </td>
                             <td>{{user.updatedOn}}</td>
                         </tr>

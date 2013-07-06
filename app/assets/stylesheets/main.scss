@@ -1,6 +1,10 @@
 @import "../foundation/scss/normalize.scss";
 @import "../foundation/scss/foundation.scss";
 
+$warningColor: #e66a6a;
+$editColor:#faa732;
+$okColor:#2ba6cb;
+
 /* class which is removed by angular when the data is loaded */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   visibility: hidden;
@@ -10,22 +14,33 @@
     cursor:pointer;
 }
 
-.deleteIcon {
-    color:#a88a8a;
+.deleteIcon, .cancelEditIcon {
+    color:rgba( $warningColor, .7 );
+    &:hover{
+        color:$warningColor;
+    }
+
+    &:hover.disabled{
+        color:rgba( $warningColor, .7 );
+    }
 }
 
-.deleteIcon:hover {
-    color:#e66a6a;
+.userEditIcon {
+    color:rgba( $editColor, .7 );
+    &:hover {
+        color:$editColor;
+    }
+}
+
+.commitEditIcon {
+    color:rgba($okColor, .7);
+    &:hover {
+        color:$okColor;
+    }
 }
 
 .saveButton {
     @include button;
-
-/*    background-color:blue;
-
-    &.disabled {
-        background-color:red;
-    } */
 }
 
 table {

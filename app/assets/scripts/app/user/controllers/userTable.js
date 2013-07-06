@@ -1,6 +1,7 @@
 angular.module('user').controller('userTable', function($scope, userService) {
 
     $scope.newUser = { };
+    $scope.userOnEdit = undefined;
     $scope.isLoading = false;
 
     var refresh = function() {
@@ -45,6 +46,18 @@ angular.module('user').controller('userTable', function($scope, userService) {
                 console.log(error.data)
             }
         )
+    }
+
+    $scope.editUser = function(user) {
+        $scope.userOnEdit = user;
+    }
+
+    $scope.commitEdit = function() {
+        $scope.userOnEdit = undefined;
+    }
+
+    $scope.rollbackEdit = function() {
+        $scope.userOnEdit = undefined;
     }
 
     $scope.update = function(user) {
