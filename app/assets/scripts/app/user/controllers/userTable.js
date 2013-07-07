@@ -53,8 +53,9 @@ angular.module('user').controller('userTable', function($scope, userService) {
     }
 
     $scope.commitEdit = function(user) {
-        userService.update({id: user.id}, {name: $scope.userOnEdit.name, email: $scope.userOnEdit.email}, function(){
-            user = angular.copy($scope.userOnEdit);
+        userService.update({id: user.id}, {name: $scope.userOnEdit.name.trim(), email: $scope.userOnEdit.email.trim()}, function(){
+            user.name = $scope.userOnEdit.name.trim();
+            user.email = $scope.userOnEdit.email.trim();
             $scope.userOnEdit = undefined;
         })
     }

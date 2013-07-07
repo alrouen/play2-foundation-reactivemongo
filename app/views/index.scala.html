@@ -59,11 +59,11 @@
                                 </span>
                             </td>
                             <td>
-                                <span ng-show="userOnEdit.id != user.id" >{{user.name}}</span>
+                                <span ng-show="userOnEdit.id != user.id" ng-model="user.name">{{user.name}}</span>
                                 <input type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50" ng-show="userOnEdit.id == user.id" ng-model="userOnEdit.name">
                             </td>
                             <td>
-                                <span ng-show="userOnEdit.id != user">{{user.email}}</span>
+                                <span ng-show="userOnEdit.id != user" ng-model="user.email">{{user.email}}</span>
                                 <input type="email" required ng-change="" ng-show="userOnEdit.id == user" ng-model="userOnEdit.email">
                             </td>
                             <td>{{user.updatedOn}}</td>
