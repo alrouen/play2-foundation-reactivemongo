@@ -61,21 +61,21 @@
                             <i class="icon-remove-sign icon-large deleteIcon" ng-class="{'disabled' : isEdited(user)}" ng-click="isEdited(user) || deleteUser(user)"></i>
                             <i class="icon-edit icon-large userEditIcon" ng-click="editUser(user)" ng-show="!isEdited(user)"></i>
                             <span ng-show="isEdited(user)">
-                                <i class="icon-ok-sign icon-large commitEditIcon" ng-click="commitEdit(user)"></i>
+                                <i class="icon-ok-sign icon-large commitEditIcon" ng-class="{'disabled' : editNameForm.$invalid || editEmailForm.$invalid}" ng-click="editNameForm.$invalid || editEmailForm.$invalid || commitEdit(user)"></i>
                                 <i class="icon-undo icon-large cancelEditIcon" ng-click="cancelEdit(user)"></i>
                             </span>
                         </td>
-                        <td>
+                        <td valign="top">
                             <span ng-hide="isEdited(user)" ng-model="user.name" ng-bind="user.name" ng-dblclick="editUser(user)"></span>
-                            <form ng-show="isEdited(user)">
+                            <form name="editNameForm" ng-show="isEdited(user)">
                                 <input type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50"  ng-model="editedUser.name">
                             </form >
                         </td>
-                        <td>
+                        <td valign="top">
                             <span ng-hide="isEdited(user)" ng-model="user.email" ng-bind="user.email" ng-dblclick="editUser(user)"></span>
-                            <form name="editUserForm" ng-show="isEdited(user)">
-                                <span ng-show="isEdited(user) && editUserForm.email.$error.emailAvailable && !editUserForm.email.$error.email && !editUserForm.email.$error.required">Email not Available!</span>
+                            <form name="editEmailForm" ng-show="isEdited(user)">
                                 <input type="email" name="email" required ui-validate="{emailAvailable:'checkEmailForEditedUser($value,user)'}" ng-model="editedUser.email">
+                                <span class="errorInfo" ng-show="isEdited(user) && editEmailForm.email.$error.emailAvailable && !editEmailForm.email.$error.email && !editEmailForm.email.$error.required">Email not Available!</span>
                             </form>
                         </td>
                         <td ng-bind="user.updatedOn"></td>
