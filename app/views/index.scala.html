@@ -65,16 +65,16 @@
                                 <i class="icon-undo icon-large cancelEditIcon" ng-click="cancelEdit(user)"></i>
                             </span>
                         </td>
-                        <td valign="top">
-                            <span ng-hide="isEdited(user)" ng-model="user.name" ng-bind="user.name" ng-dblclick="editUser(user)"></span>
+                        <td valign="top" ng-dblclick="editUser(user)">
+                            <span ng-hide="isEdited(user)" ng-model="user.name" ng-bind="user.name" ></span>
                             <form name="editNameForm" ng-show="isEdited(user)">
-                                <input type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50"  ng-model="editedUser.name">
+                                <input type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50"  ng-model="editedUser.name" ui-keypress="{'enter':'editNameForm.$invalid || editEmailForm.$invalid || commitEdit(user)'}" ui-keyup="{'esc':'cancelEdit(user)'}">
                             </form >
                         </td>
-                        <td valign="top">
-                            <span ng-hide="isEdited(user)" ng-model="user.email" ng-bind="user.email" ng-dblclick="editUser(user)"></span>
+                        <td valign="top" ng-dblclick="editUser(user)">
+                            <span ng-hide="isEdited(user)" ng-model="user.email" ng-bind="user.email"></span>
                             <form name="editEmailForm" ng-show="isEdited(user)">
-                                <input type="email" name="email" required ui-validate="{emailAvailable:'checkEmailForEditedUser($value,user)'}" ng-model="editedUser.email">
+                                <input type="email" name="email" required ui-validate="{emailAvailable:'checkEmailForEditedUser($value,user)'}" ng-model="editedUser.email" ui-keypress="{'enter':'editNameForm.$invalid || editEmailForm.$invalid || commitEdit(user)'}" ui-keyup="{'esc':'cancelEdit(user)'}">
                                 <span class="errorInfo" ng-show="isEdited(user) && editEmailForm.email.$error.emailAvailable && !editEmailForm.email.$error.email && !editEmailForm.email.$error.required">Email not Available!</span>
                             </form>
                         </td>
