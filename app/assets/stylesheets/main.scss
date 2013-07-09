@@ -39,6 +39,13 @@ $okColor:#2ba6cb;
     }
 }
 
+@media #{$small} {
+ .submitZone {
+    position:relative;
+    top:75px;
+ }
+}
+
 .saveButton {
     @include button;
 }
@@ -46,10 +53,6 @@ $okColor:#2ba6cb;
 table {
     .rowForInput {
         border-top:1px lightgrey solid;
-        background-color:whitesmoke !important;
-    }
-
-    .rowForMessage {
         border-bottom:1px lightgrey solid;
         background-color:whitesmoke !important;
     }
