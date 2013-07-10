@@ -6,7 +6,6 @@ import play.modules.reactivemongo.json.BSONFormats._
 import reactivemongo.api._
 import ExecutionContext.Implicits.global
 import play.api.libs.json._
-import reactivemongo.api.indexes.{Index, IndexType}
 import reactivemongo.bson.BSONDocument
 
 abstract class MongoModel[T: Format, ID: Format] {
@@ -14,6 +13,7 @@ abstract class MongoModel[T: Format, ID: Format] {
   val collection: JSONCollection
   implicit val ec: ExecutionContext
 
+  //TODO : managing indexing from MongoModel
   /*def ensureIndexes: Future[List[Boolean]]
 
   def ensureIndex(

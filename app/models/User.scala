@@ -3,7 +3,7 @@ package models
 import reactivemongo.bson.BSONObjectID
 import org.joda.time.DateTime
 
-import play.api.libs.json.{Format, Json}
+import play.api.libs.json.Json
 import play.api.Play.current
 import play.modules.reactivemongo.ReactiveMongoPlugin
 import play.modules.reactivemongo.json.collection.JSONCollection
