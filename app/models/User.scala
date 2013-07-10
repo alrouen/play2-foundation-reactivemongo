@@ -1,6 +1,8 @@
 package models
 
+import scala.concurrent.Future
 import reactivemongo.bson.BSONObjectID
+import reactivemongo.api.indexes.IndexType._
 import org.joda.time.DateTime
 
 import play.api.libs.json.Json
@@ -32,6 +34,13 @@ object User {
 object Users extends MongoModel[User, BSONObjectID] {
   override lazy val collection = ReactiveMongoPlugin.db.collection[JSONCollection]("users")
   override implicit val ec = play.api.libs.concurrent.Execution.Implicits.defaultContext
+  override def ensureIndexes = {
+    Future.sequence(List(
+      ensureIndex(List("email" -> Ascending), unique = true),
+      ensureIndex(List("name" -> Ascending)),
+      ensureIndex(List("updatedOn" -> Descending))
+    ))
+  }
 
   def findByName(name: String) = find(Json.obj("name" -> name))
   def findByEmail(email: String) = findOne(Json.obj("email" -> email))

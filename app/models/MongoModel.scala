@@ -7,6 +7,7 @@ import reactivemongo.api._
 import ExecutionContext.Implicits.global
 import play.api.libs.json._
 import reactivemongo.bson.BSONDocument
+import reactivemongo.api.indexes.{Index, IndexType}
 
 abstract class MongoModel[T: Format, ID: Format] {
 
@@ -14,7 +15,7 @@ abstract class MongoModel[T: Format, ID: Format] {
   implicit val ec: ExecutionContext
 
   //TODO : managing indexing from MongoModel
-  /*def ensureIndexes: Future[List[Boolean]]
+  def ensureIndexes: Future[List[Boolean]]
 
   def ensureIndex(
     key: List[(String, IndexType)],
@@ -26,7 +27,7 @@ abstract class MongoModel[T: Format, ID: Format] {
     version: Option[Int] = None,
     options: BSONDocument = BSONDocument()) = {
     collection.indexesManager.ensure(Index(key, name, unique, background, dropDups, sparse, version, options))
-  }*/
+  }
 
   //TODO: follow-up on https://github.com/zenexity/ReactiveMongo/issues/72
   def find(query: JsObject, sort: JsObject = Json.obj(), limit: Int = Int.MaxValue): Future[List[T]] = {
