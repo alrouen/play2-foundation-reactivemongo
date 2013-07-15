@@ -46,13 +46,3 @@ abstract class MongoModel[T: Format, ID: Format] {
   def remove(id: ID) = collection.remove(Json.obj("_id" -> id))
 
 }
-
-object DateTimeToBsonDate extends Format[DateTime] {
-  def reads(jsDate: JsValue) = {
-    jsDate.\("$date").asOpt[JsNumber].map { mayBeLong => JsSuccess(new DateTime(mayBeLong.value.toLong))}.getOrElse(JsError("invalid format"))
-  }
-
-  def writes(datetime: DateTime) = {
-    Json.obj("$date" -> datetime.getMillis)
-  }
-}

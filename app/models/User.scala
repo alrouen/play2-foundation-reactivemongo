@@ -27,11 +27,9 @@ case class User(
   def isPasswordValid(password: String): Boolean = password == User.hashPwd(password)
 }
 
-object User {
+object User extends CustomFormat {
   private val seed = "play-skeleton"
   def hashPwd(password: String): String = Codecs.sha1(password + seed)
-
-  implicit val datetimeFormat = DateTimeToBsonDate
 
   implicit val userFormat = Json.format[User]
 }
