@@ -22,16 +22,13 @@ angular.module('user').controller('userTable', function($scope, $q, userService)
             userService.get({id: "checkEmail", email : email},
                 function(response) {
                     if(response.alreadyExist) { // if already exist, then not available...
-                        //false;
                         deferred.reject(false);
                     } else {
                         deferred.resolve(true);
-                        //true;
                     }
                 },
                 function(error) {
                     deferred.reject(false);
-                    //false
                 }
             );
             return deferred.promise;

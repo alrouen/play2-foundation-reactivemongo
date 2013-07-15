@@ -2,12 +2,13 @@ package models
 
 import scala.concurrent.{Future, ExecutionContext}
 import play.modules.reactivemongo.json.collection.JSONCollection
-import play.modules.reactivemongo.json.BSONFormats._
+import play.modules.reactivemongo.json.BSONFormats.BSONObjectIDFormat
 import reactivemongo.api._
 import ExecutionContext.Implicits.global
 import play.api.libs.json._
 import reactivemongo.bson.BSONDocument
 import reactivemongo.api.indexes.{Index, IndexType}
+import org.joda.time.DateTime
 
 abstract class MongoModel[T: Format, ID: Format] {
 
@@ -44,4 +45,14 @@ abstract class MongoModel[T: Format, ID: Format] {
 
   def remove(id: ID) = collection.remove(Json.obj("_id" -> id))
 
+}
+
+object DateTimeToBsonDate extends Format[DateTime] {
+  def reads(jsDate: JsValue) = {
+    jsDate.\("$date").asOpt[JsNumber].map { mayBeLong => JsSuccess(new DateTime(mayBeLong.value.toLong))}.getOrElse(JsError("invalid format"))
+  }
+
+  def writes(datetime: DateTime) = {
+    Json.obj("$date" -> datetime.getMillis)
+  }
 }

@@ -5,12 +5,14 @@ import reactivemongo.bson.BSONObjectID
 import reactivemongo.api.indexes.IndexType._
 import org.joda.time.DateTime
 
-import play.api.libs.json.Json
+import play.api.libs.json._
 import play.api.Play.current
 import play.modules.reactivemongo.ReactiveMongoPlugin
-import play.modules.reactivemongo.json.collection.JSONCollection
-import play.modules.reactivemongo.json.BSONFormats._
+import play.modules.reactivemongo.json.BSONFormats.BSONObjectIDFormat
 import play.api.libs.Codecs
+import play.api.libs.json.JsSuccess
+import play.modules.reactivemongo.json.collection.JSONCollection
+import play.api.libs.json.JsNumber
 
 case class User(
        _id: BSONObjectID = BSONObjectID.generate,
@@ -28,6 +30,9 @@ case class User(
 object User {
   private val seed = "play-skeleton"
   def hashPwd(password: String): String = Codecs.sha1(password + seed)
+
+  implicit val datetimeFormat = DateTimeToBsonDate
+
   implicit val userFormat = Json.format[User]
 }
 
