@@ -4,15 +4,17 @@ import scala.concurrent.{ExecutionContext, Future}
 import ExecutionContext.Implicits.global
 import play.api.mvc._
 import play.api.libs.json.{JsError, Json, Writes}
-import models.{Users, User, ApiFormat}
+import models.{Users, User}
+import models.ApiFormat._
 import reactivemongo.bson.BSONObjectID
 import play.Logger
 
 
-object UserApi extends Controller with ApiFormat {
+object UserApi extends Controller {
 
 
   def getAllUsers = Action {
+
     Async {
       Users.findAll(Json.obj("updatedOn" -> -1)).map { users =>
         Ok(Json.toJson(users)(Writes.seq(userApiWrites)))

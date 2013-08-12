@@ -1,10 +1,11 @@
 package models
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import reactivemongo.bson.BSONObjectID
 import reactivemongo.api.indexes.IndexType._
 import org.joda.time.DateTime
 
+import ExecutionContext.Implicits.global
 import play.api.libs.json._
 import play.api.Play.current
 import play.modules.reactivemongo.ReactiveMongoPlugin
@@ -27,18 +28,19 @@ case class User(
   def isPasswordValid(password: String): Boolean = password == User.hashPwd(password)
 }
 
-object User extends CustomFormat {
+object User {
   private val seed = "play-skeleton"
   def hashPwd(password: String): String = Codecs.sha1(password + seed)
 
+  import CustomFormat.DateTimeToBsonDate
   implicit val userFormat = Json.format[User]
 }
 
 object Users extends MongoModel[User, BSONObjectID] {
   override lazy val collection = ReactiveMongoPlugin.db.collection[JSONCollection]("users")
-  override implicit val ec = play.api.libs.concurrent.Execution.Implicits.defaultContext
   override def ensureIndexes = {
     Future.sequence(List(
+      ensureIndex(List("_id"-> Ascending, "email" -> Ascending)),
       ensureIndex(List("email" -> Ascending), unique = true),
       ensureIndex(List("name" -> Ascending)),
       ensureIndex(List("updatedOn" -> Descending))
@@ -48,7 +50,7 @@ object Users extends MongoModel[User, BSONObjectID] {
   def findByName(name: String) = find(Json.obj("name" -> name))
   def findByEmail(email: String) = findOne(Json.obj("email" -> email))
 
-  def update(user: User) = {
+  override def update(user: User) = {
     collection.save(user.copy(updatedOn = new DateTime))
   }
 

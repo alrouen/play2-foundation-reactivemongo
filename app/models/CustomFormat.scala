@@ -5,7 +5,7 @@ import org.joda.time.DateTime
 import play.api.libs.json.JsSuccess
 import play.api.libs.json.JsNumber
 
-trait CustomFormat {
+object CustomFormat {
 
   implicit object DateTimeToBsonDate extends Format[DateTime] {
     def reads(jsDate: JsValue) = {

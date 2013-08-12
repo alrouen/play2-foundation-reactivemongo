@@ -4,7 +4,7 @@ import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
 
-trait ApiFormat {
+object ApiFormat {
 
   implicit val datetimeReads = Reads.jodaDateReads("yyyy-MM-dd'T'HH:mmZ") // => we override the default DateTime format
   implicit val datetimeWrites = Writes.jodaDateWrites("yyyy-MM-dd'T'HH:mmZ")
