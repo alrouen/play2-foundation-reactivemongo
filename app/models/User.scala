@@ -37,7 +37,7 @@ object User {
 }
 
 object Users extends MongoModel[User, BSONObjectID] {
-  override lazy val collection = ReactiveMongoPlugin.db.collection[JSONCollection]("users")
+  override def collection = ReactiveMongoPlugin.db.collection[JSONCollection]("users")
   override def ensureIndexes = {
     Future.sequence(List(
       ensureIndex(List("_id"-> Ascending, "email" -> Ascending)),
