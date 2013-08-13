@@ -14,7 +14,7 @@ import reactivemongo.core.commands.Count
 
 abstract class MongoModel[T: Format, ID: Format] {
 
-  val collection: JSONCollection
+  def collection: JSONCollection
 
   //TODO : managing indexing from MongoModel
   def ensureIndexes: Future[List[Boolean]]
