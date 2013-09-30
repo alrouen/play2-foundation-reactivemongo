@@ -1,4 +1,7 @@
-angular.module('user').controller('userTable', function($scope, $q, userService) {
+define(["angular"], function(angular) {
+  "use strict";
+
+  var userTable = function($scope, $q, userService) {
 
     $scope.newUser = {};
     $scope.editedUser = {};
@@ -92,4 +95,16 @@ angular.module('user').controller('userTable', function($scope, $q, userService)
     }
 
     refresh();
+
+
+  }
+
+  userTable.$inject = ["$scope", "$q", "userService"];
+
+  return {
+    userTable: userTable
+  };
+
 });
+
+

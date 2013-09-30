@@ -12,7 +12,6 @@ import play.Logger
 
 object UserApi extends Controller {
 
-
   def getAllUsers = Action {
 
     Async {

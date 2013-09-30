@@ -14,6 +14,9 @@ object ApplicationBuild extends Build {
   libraryDependencies ++= Seq()
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
+
+
+
     scalacOptions += "-feature",
     SassPlugin.sassOptions := Seq("--compass","-C"),
     SassPlugin.sassEntryPoints <<= (sourceDirectory in Compile)(base => ((base / "assets" ** "*.sass") +++ (base / "assets" ** "*.scss") --- base / "assets" ** "_*")),
