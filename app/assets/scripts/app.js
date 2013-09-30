@@ -1,3 +1,4 @@
-define(["angular", "angular-resource", "user"], function(angular) {
-  return angular.module("app", ["ngResource", "app.user"]);
+define(["angular", "angular-resource", "angular-ui-util", "user", "./directives"], function(angular) {
+  var app = angular.module("app", ["ngResource", "ui.utils", "app.user", "directives"]);
+  return app;
 });

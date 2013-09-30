@@ -25,7 +25,8 @@ object ApiFormat {
   val validateCreateUser = ((
     (__ \ 'name ).read(validateNotEmptyString) and
     (__ \ 'email ).read(email) and
-    (__ \ 'password).read(validateNotEmptyString)
+    (__ \ 'password).read(validateNotEmptyString) and
+    (__ \ 'confirmPassword).read(validateNotEmptyString)
     ).tupled
   )
 

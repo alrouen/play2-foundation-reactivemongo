@@ -8,9 +8,13 @@
             exports: "$"
         },
 
+        "helper": {
+            deps: ["jquery"],
+            exports: "helper"
+        },
+
         "jsRoutes" : {
             deps : [],
-            // it's not a RequireJS module, so we have to tell it what var is returned
             exports : "jsRoutes"
         },
 
@@ -73,7 +77,7 @@
         "angular-resource": "//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular-resource.min",
         "angular-ui-util": "/assets/javascripts/angular-ui-utils.min",
         "jsRoutes": "/assets/javascripts/routes",
-        //"common": "/assets/scripts/helper",
+        "helper": "/assets/scripts/helper",
         "foundation": "/assets/foundation/js/foundation/foundation",
         "foundation.alerts": "/assets/foundation/js/foundation/foundation.alerts",
         "foundation.clearing": "/assets/foundation/js/foundation/foundation.clearing",
@@ -97,7 +101,7 @@
     console.log(err);
   };
 
-  require(["angular", "app", "angular-resource", "angular-ui-util", "jsRoutes", "jquery",
+  require(["angular", "app", "angular-resource", "angular-ui-util", "jquery",
            "foundation.alerts",
            "foundation.clearing",
            "foundation.cookie",
@@ -113,8 +117,8 @@
            "foundation.tooltips",
            "foundation.topbar"
   ], function(angular, app) {
-        $(document).foundation();
         angular.bootstrap(document , ['app']);
+        $(document).foundation();
     });
 
 })(requirejs);

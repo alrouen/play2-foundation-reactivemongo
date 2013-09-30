@@ -25,7 +25,7 @@ object UserApi extends Controller {
   def createUser = Action(parse.json) { request =>
 
     request.body.validate(validateCreateUser).map {
-      case(name, email, password) => {
+      case(name, email, password, confirmPassword) => {
         Async {
           for {
             maybeUser <- Users.findByEmail(email)

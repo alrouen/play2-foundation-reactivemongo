@@ -96,7 +96,6 @@ define(["angular"], function(angular) {
 
     refresh();
 
-
   }
 
   userTable.$inject = ["$scope", "$q", "userService"];

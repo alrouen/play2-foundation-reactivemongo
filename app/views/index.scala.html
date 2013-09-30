@@ -35,7 +35,7 @@
                                         <input id="email" name="email" type="email" required ui-validate="{emailAvailable:'checkEmailAvailability($value)'}" ng-model="newUser.email">
                                     </div>
                                     <div class="large-4 columns">
-                                        <label for="password">Password (min strength level 4)<span ng-show="newUser.passwordStrength > 0">, level : {{newUser.passwordStrength}}</span></label>
+                                        <label for="password">Password (min strength level 4)<span class="ng-cloak" ng-show="newUser.passwordStrength > 0">, level : {{newUser.passwordStrength}}</span></label>
                                         <input id="password" type="password" required ng-minlength="5" ng-maxlength="50" maxlength="50" ng-model="newUser.password">
                                         <div style="height:18px;">
                                             <ul name="passwordStrength" class="passwordStrength" validate-strength="4" validate-strength-watch="newUser.password" ng-model="newUser.passwordStrength"></ul>
@@ -47,7 +47,7 @@
                                         <button type="submit" class="saveButton radius small" ng-class="{'disabled' : newUserForm.$invalid}" ng-click="newUserForm.$invalid || createUser(newUser)">
                                             <i class="icon-save icon-large"></i>
                                         </button>
-                                        <span class="errorInfo" ng-show="newUserForm.email.$error.emailAvailable && !newUserForm.email.$error.email && !newUserForm.email.$error.required">&nbsp;Email already existing!</span>
+                                        <span class="errorInfo ng-cloak" ng-show="newUserForm.email.$error.emailAvailable && !newUserForm.email.$error.email && !newUserForm.email.$error.required">&nbsp;Email already existing!</span>
                                     </div>
                                 </div>
                             </form>
@@ -64,21 +64,21 @@
                     <tr ng-repeat="user in users">
                         <td>
                             <i class="icon-remove-sign icon-large deleteIcon" ng-class="{'disabled' : isEdited(user)}" ng-click="isEdited(user) || deleteUser(user)"></i>
-                            <i class="icon-edit icon-large userEditIcon" ng-click="editUser(user)" ng-show="!isEdited(user)"></i>
-                            <span ng-show="isEdited(user)">
+                            <i class="icon-edit icon-large userEditIcon ng-cloak" ng-click="editUser(user)" ng-show="!isEdited(user)"></i>
+                            <span class="ng-cloak" ng-show="isEdited(user)">
                                 <i class="icon-ok-sign icon-large commitEditIcon" ng-class="{'disabled' : editNameForm.$invalid || editEmailForm.$invalid}" ng-click="editNameForm.$invalid || editEmailForm.$invalid || commitEdit(user)"></i>
                                 <i class="icon-undo icon-large cancelEditIcon" ng-click="cancelEdit(user)"></i>
                             </span>
                         </td>
                         <td valign="top" ng-dblclick="editUser(user)">
-                            <span ng-hide="isEdited(user)" ng-model="user.name" ng-bind="user.name" ></span>
-                            <form name="editNameForm" ng-show="isEdited(user)">
+                            <span ng-hide="isEdited(user)" ng-model="user.name" ng-bind="user.name"></span>
+                            <form name="editNameForm" class="ng-cloak" ng-show="isEdited(user)">
                                 <input type="text" required ng-minlength="1" ng-maxlength="50" maxlength="50"  ng-model="editedUser.name" ui-keypress="{'enter':'editNameForm.$invalid || editEmailForm.$invalid || commitEdit(user)'}" ui-keyup="{'esc':'cancelEdit(user)'}">
                             </form >
                         </td>
                         <td valign="top" ng-dblclick="editUser(user)">
                             <span ng-hide="isEdited(user)" ng-model="user.email" ng-bind="user.email"></span>
-                            <form name="editEmailForm" ng-show="isEdited(user)">
+                            <form name="editEmailForm" class="ng-cloak" ng-show="isEdited(user)">
                                 <input type="email" name="email" required ui-validate="{emailAvailable:'checkEmailForEditedUser($value,user)'}" ng-model="editedUser.email" ui-keypress="{'enter':'editNameForm.$invalid || editEmailForm.$invalid || commitEdit(user)'}" ui-keyup="{'esc':'cancelEdit(user)'}">
                                 <span class="errorInfo" ng-show="isEdited(user) && editEmailForm.email.$error.emailAvailable && !editEmailForm.email.$error.email && !editEmailForm.email.$error.required">Email not Available!</span>
                             </form>

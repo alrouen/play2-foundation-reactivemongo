@@ -1,9 +1,8 @@
 escapeRegExp = function(str) {
-        return str.replace(/[-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-    }
+    return str.replace(/[-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
 
-passwordStrength = function(newPassword, username, oldPassword)
-{
+passwordStrength = function(newPassword, username, oldPassword) {
     var result = 0;
     var score = 0;
     var usernamePattern = new RegExp('.*'+escapeRegExp(username || '')+'.*','g');
