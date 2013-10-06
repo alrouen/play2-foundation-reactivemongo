@@ -1,6 +1,7 @@
 import net.litola.SassPlugin
 import sbt._
 import Keys._
+import play.Project._
 
 object ApplicationBuild extends Build {
 
@@ -15,7 +16,8 @@ object ApplicationBuild extends Build {
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
 
-
+    requireJs += "main.js",
+    requireJsShim += "build.js",
 
     scalacOptions += "-feature",
     SassPlugin.sassOptions := Seq("--compass","-C"),

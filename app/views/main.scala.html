@@ -16,7 +16,7 @@
     <script src="/assets/javascripts/respond.js"></script>
     <![endif]-->
 
-    @helper.requireJs(core = routes.Assets.at("javascripts/require.js").url, module = routes.Assets.at("scripts/main").url)
+    @helper.requireJs(core = "//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.min.js", module = routes.Assets.at("javascripts/main").url)
     @head
 </head>
 <body style="height:100%">
